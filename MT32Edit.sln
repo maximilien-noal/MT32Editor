@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT32Editor.Core", "src\MT32Editor.Core\MT32Editor.Core.csproj", "{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT32Edit", "src\MT32Editor\MT32Edit.csproj", "{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MT32Editor.Avalonia", "src\MT32Editor.Avalonia\MT32Editor.Avalonia.csproj", "{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}"
 EndProject
 #Uncomment the below two lines to build the .NET Framework 2.0 version
 #Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MT32Edit-legacy", "src\MT32Editor-legacy\MT32Edit_legacy.csproj", "{B01BE334-F0C5-4087-A2C7-24920778F4DA}"
@@ -18,6 +22,18 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x64.Build.0 = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}.Release|x86.Build.0 = Release|Any CPU
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Debug|x64.ActiveCfg = Debug|x64
@@ -30,6 +46,18 @@ Global
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Release|x64.Build.0 = Release|x64
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Release|x86.ActiveCfg = Release|x86
 		{B08B2A0B-8E79-45CA-8C85-01E74E0A285A}.Release|x86.Build.0 = Release|x86
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|x64.Build.0 = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Debug|x86.Build.0 = Debug|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|x64.ActiveCfg = Release|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|x64.Build.0 = Release|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|x86.ActiveCfg = Release|Any CPU
+		{C2D3E4F5-A6B7-8901-CDEF-234567890ABC}.Release|x86.Build.0 = Release|Any CPU
 		{B01BE334-F0C5-4087-A2C7-24920778F4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B01BE334-F0C5-4087-A2C7-24920778F4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B01BE334-F0C5-4087-A2C7-24920778F4DA}.Debug|x64.ActiveCfg = Debug|Any CPU
