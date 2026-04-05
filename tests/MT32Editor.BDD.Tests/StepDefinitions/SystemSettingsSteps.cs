@@ -119,12 +119,14 @@ public class SystemSettingsSteps
     [When("I set display message {int} to {string}")]
     public void WhenISetDisplayMessageTo(int messageNo, string text)
     {
+        // BDD feature uses 1-based message numbers; API uses 0-based
         _system.SetMessage(messageNo - 1, text);
     }
 
     [Then("display message {int} should be {string}")]
     public void ThenDisplayMessageShouldBe(int messageNo, string expected)
     {
+        // BDD feature uses 1-based message numbers; API uses 0-based
         string actual = _system.GetMessage(messageNo - 1);
         Assert.StartsWith(expected, actual);
     }
