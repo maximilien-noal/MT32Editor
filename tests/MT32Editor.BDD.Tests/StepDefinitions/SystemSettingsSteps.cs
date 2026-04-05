@@ -142,4 +142,34 @@ public class SystemSettingsSteps
     {
         Assert.Equal(expected, _system.GetUIMidiChannel(part));
     }
+
+    [Given("a new system level is created")]
+    public void GivenANewSystemLevelIsCreated()
+    {
+        _system = new SystemLevel();
+    }
+
+    [Then("the master volume should be {int}")]
+    public void ThenTheMasterVolumeShouldBe(int expected)
+    {
+        Assert.Equal(expected, _system.GetMasterLevel());
+    }
+
+    [Then("the master tune should be {int}")]
+    public void ThenTheMasterTuneShouldBe(int expected)
+    {
+        Assert.Equal(expected, _system.GetMasterTune());
+    }
+
+    [When("I set reverb type to {int}")]
+    public void WhenISetReverbTypeTo(int type)
+    {
+        _system.SetReverbMode(type);
+    }
+
+    [Then("the reverb type should be {int}")]
+    public void ThenTheReverbTypeShouldBe(int expected)
+    {
+        Assert.Equal(expected, _system.GetReverbMode());
+    }
 }

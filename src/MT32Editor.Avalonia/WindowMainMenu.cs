@@ -18,6 +18,8 @@ public partial class WindowMainMenu : Window
     private const string RELEASE_DATE = "March 2026";
     private const int MINIMUM_WIDTH = 1220;
     private const int MINIMUM_HEIGHT = 1036;
+    private const int APP_WINDOW_DEFAULT_WIDTH = 1774;
+    private const int APP_WINDOW_DEFAULT_HEIGHT = 1038;
 
     private readonly MT32State memoryState = new MT32State();
     private PanelTimbreEditor? timbreEditor;
@@ -250,6 +252,19 @@ public partial class WindowMainMenu : Window
         };
         optionsMenu.Items.Add(menuDarkMode);
         menuBar.Items.Add(optionsMenu);
+
+        // --- View menu ---
+        var viewMenu = new MenuItem { Header = "_View" };
+        var restoreWindowSize = new MenuItem { Header = "Restore Default Window Size" };
+        restoreWindowSize.Click += (_, _) =>
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            Width = APP_WINDOW_DEFAULT_WIDTH;
+            Height = APP_WINDOW_DEFAULT_HEIGHT;
+        };
+        viewMenu.Items.Add(restoreWindowSize);
+        menuBar.Items.Add(viewMenu);
 
         // --- Help menu ---
         var helpMenu = new MenuItem { Header = "_Help" };

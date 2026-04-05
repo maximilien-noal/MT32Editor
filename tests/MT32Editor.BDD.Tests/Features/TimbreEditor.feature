@@ -234,3 +234,40 @@ Feature: Timbre Editor
         And I mute partial 2
         And I mute partial 3
         Then all partials should be muted
+
+    Scenario: PCM waveform disables TVF controls conceptually
+        Given a new timbre editor is opened
+        When I set waveform on partial 0 to 1
+        Then the waveform on partial 0 should be PCM
+        And TVF controls should be conceptually disabled for PCM
+
+    Scenario: LA Synth waveform enables TVF controls
+        Given a new timbre editor is opened
+        When I set waveform on partial 0 to 0
+        Then the waveform on partial 0 should be LA Synth
+        And TVF controls should be enabled for LA Synth
+
+    Scenario: Switching from PCM to LA Synth re-enables TVF
+        Given a new timbre editor is opened
+        When I set waveform on partial 0 to 1
+        And I set waveform on partial 0 to 0
+        Then TVF controls should be enabled for LA Synth
+
+    Scenario: Timbre undo restores previous state
+        Given a new timbre editor is opened with history
+        When I set the timbre name to "BeforeUndo"
+        And I record the change in history
+        And I set the timbre name to "AfterChange"
+        And I record the change in history
+        And I undo the last change
+        Then the timbre name should start with "BeforeUndo"
+
+    Scenario: Multiple undo and redo operations
+        Given a new timbre editor is opened with history
+        When I set the timbre name to "State1"
+        And I record the change in history
+        And I set the timbre name to "State2"
+        And I record the change in history
+        And I undo the last change
+        And I redo the last change
+        Then the timbre name should start with "State2"

@@ -123,4 +123,22 @@ public class PatchEditorSteps
     {
         Assert.False(_patch.GetReverbEnabled());
     }
+
+    [Then("the key shift should be {int}")]
+    public void ThenTheKeyShiftShouldBe(int expected)
+    {
+        Assert.Equal(expected, _patch.GetKeyShift());
+    }
+
+    [Then("the fine tune should be {int}")]
+    public void ThenTheFineTuneShouldBe(int expected)
+    {
+        Assert.Equal(expected, _patch.GetFineTune());
+    }
+
+    [Then("the bender range should be {int}")]
+    public void ThenTheBenderRangeShouldBe(int expected)
+    {
+        Assert.Equal(expected, _patch.GetBenderRange());
+    }
 }

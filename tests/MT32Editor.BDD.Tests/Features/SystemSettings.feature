@@ -51,3 +51,24 @@ Feature: System Settings
         Given a new system level configuration
         When I set MIDI channel for part 0 to 0
         Then MIDI channel for part 0 should be 0
+
+    Scenario: Master volume boundary values
+        Given a new system level is created
+        When I set master volume to 0
+        Then the master volume should be 0
+        When I set master volume to 100
+        Then the master volume should be 100
+
+    Scenario: Master tune boundary values
+        Given a new system level is created
+        When I set master tune to 0
+        Then the master tune should be 0
+        When I set master tune to 127
+        Then the master tune should be 127
+
+    Scenario: Reverb type values
+        Given a new system level is created
+        When I set reverb type to 0
+        Then the reverb type should be 0
+        When I set reverb type to 3
+        Then the reverb type should be 3

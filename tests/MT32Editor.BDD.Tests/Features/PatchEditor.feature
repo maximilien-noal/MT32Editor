@@ -57,3 +57,31 @@ Feature: Patch Editor
         Then key shift should be 0
         And fine tune should be 0
         And bender range should be 12
+
+    Scenario: Multiple patches can have different timbres
+        Given a new patch is created for slot 0
+        When I set the timbre group to 0
+        Then the timbre group should be 0
+        When I set the timbre group to 2
+        Then the timbre group should be 2
+
+    Scenario: Key shift boundary values
+        Given a new patch is created for slot 0
+        When I set key shift to -24
+        Then the key shift should be -24
+        When I set key shift to 24
+        Then the key shift should be 24
+
+    Scenario: Fine tune boundary values
+        Given a new patch is created for slot 0
+        When I set fine tune to -50
+        Then the fine tune should be -50
+        When I set fine tune to 50
+        Then the fine tune should be 50
+
+    Scenario: Bender range boundary values
+        Given a new patch is created for slot 0
+        When I set bender range to 0
+        Then the bender range should be 0
+        When I set bender range to 24
+        Then the bender range should be 24

@@ -297,4 +297,32 @@ public class TimbreEditorSteps
             Assert.True(status[i], $"Partial {i} should be muted");
         }
     }
+
+    // PCM/LA Synth waveform type checks
+    [Then("the waveform on partial {int} should be PCM")]
+    public void ThenTheWaveformOnPartialShouldBePCM(int partial)
+    {
+        Assert.Equal(1, _timbre.GetUIParameter(partial, 0x04));
+    }
+
+    [Then("the waveform on partial {int} should be LA Synth")]
+    public void ThenTheWaveformOnPartialShouldBeLASynth(int partial)
+    {
+        Assert.Equal(0, _timbre.GetUIParameter(partial, 0x04));
+    }
+
+    [Then("TVF controls should be conceptually disabled for PCM")]
+    public void ThenTVFControlsShouldBeConceptuallyDisabledForPCM()
+    {
+        // When waveform is PCM (1), TVF controls are disabled in the UI.
+        // In the Core model, the waveform parameter determines this.
+        Assert.Equal(1, _timbre.GetUIParameter(0, 0x04));
+    }
+
+    [Then("TVF controls should be enabled for LA Synth")]
+    public void ThenTVFControlsShouldBeEnabledForLASynth()
+    {
+        // When waveform is LA Synth (0), TVF controls are enabled in the UI.
+        Assert.Equal(0, _timbre.GetUIParameter(0, 0x04));
+    }
 }

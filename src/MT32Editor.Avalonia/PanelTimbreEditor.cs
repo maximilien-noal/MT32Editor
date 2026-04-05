@@ -36,7 +36,13 @@ public class PanelTimbreEditor : UserControl
     private readonly Button buttonRedo;
     private readonly Button buttonCopyPartial;
     private readonly Button buttonPastePartial;
+    private readonly Button buttonQuickSave;
     private byte[]? partialClipboard;
+    private string? lastSavedTimbreFilePath;
+    private bool allowQuickSave = false;
+
+    // TVF disabled overlay (shown when PCM waveform is selected)
+    private readonly TextBlock labelTVFDisabled;
 
     // Parameter sliders: indexed by parameter number (0x00-0x39)
     private readonly Slider?[] sliders = new Slider?[0x3A];
@@ -92,23 +98,23 @@ public class PanelTimbreEditor : UserControl
         buttonLoad.Click += (_, _) =>
         {
             string result = TimbreFile.Load(timbre);
-            if (FileTools.Success(result)) SetAllControlValues();
+            if (FileTools.Success(result))
+            {
+                lastSavedTimbreFilePath = result;
+                allowQuickSave = true;
+                if (buttonQuickSave is not null) buttonQuickSave.IsEnabled = true;
+                SetAllControlValues();
+            }
         };
         topBar.Children.Add(buttonLoad);
 
-        var buttonSave = new Button { Content = "Save" };
-        buttonSave.Click += (_, _) =>
-        {
-            string? filePath = PlatformServices.FileDialog.ShowSaveFileDialog("Save Timbre File", "Timbre file|*.timbre", timbre.GetTimbreName());
-            if (filePath is not null)
-            {
-                var fs = File.Create(filePath);
-                TimbreFile.SaveTimbreParameters(timbre, fs);
-                TimbreFile.SavePartials(timbre, fs);
-                fs.Close();
-            }
-        };
+        var buttonSave = new Button { Content = "Save As" };
+        buttonSave.Click += (_, _) => SaveTimbreAs();
         topBar.Children.Add(buttonSave);
+
+        buttonQuickSave = new Button { Content = "Quick Save", IsEnabled = false };
+        buttonQuickSave.Click += (_, _) => QuickSaveTimbre();
+        topBar.Children.Add(buttonQuickSave);
 
         buttonUndo = new Button { Content = "Undo", IsEnabled = false };
         buttonUndo.Click += (_, _) =>
@@ -268,6 +274,7 @@ public class PanelTimbreEditor : UserControl
             {
                 timbre.SetUIParameter(activePartial, 0x04, comboBoxWaveform.SelectedIndex);
                 MT32SysEx.SendPartialParameter(activePartial, 0x04, timbre.GetUIParameter(activePartial, 0x04));
+                UpdatePCMLASynthControls();
             }
         };
         waveBar.Children.Add(comboBoxWaveform);
@@ -290,6 +297,18 @@ public class PanelTimbreEditor : UserControl
         radioButtonPCMBankA.IsCheckedChanged += (_, _) => { if (!blockParameterUpdates) PopulatePCMSamples(); };
         waveBar.Children.Add(radioButtonPCMBankA);
         waveBar.Children.Add(radioButtonPCMBankB);
+
+        // TVF Disabled label (shown when PCM waveform selected, matching WinForms labelTVFDisabled)
+        labelTVFDisabled = new TextBlock
+        {
+            Text = "TVF disabled (PCM waveform)",
+            Foreground = Brushes.Red,
+            FontWeight = FontWeight.Bold,
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(10, 0, 0, 0),
+            IsVisible = false
+        };
+        waveBar.Children.Add(labelTVFDisabled);
 
         DockPanel.SetDock(waveBar, Dock.Top);
         rootPanel.Children.Add(waveBar);
@@ -490,6 +509,7 @@ public class PanelTimbreEditor : UserControl
         }
 
         UpdateAllGraphs();
+        UpdatePCMLASynthControls();
         blockParameterUpdates = false;
     }
 
@@ -506,5 +526,105 @@ public class PanelTimbreEditor : UserControl
     {
         buttonUndo.IsEnabled = timbreHistory.GetLatestActionNo() > 0;
         buttonRedo.IsEnabled = timbreHistory.GetLatestActionNo() < timbreHistory.GetTopOfStack();
+    }
+
+    /// <summary>
+    /// Toggles PCM vs LA Synth controls based on current waveform selection.
+    /// Matches WinForms ShowOnlyPCMControls() and ShowOnlyLASynthControls().
+    /// </summary>
+    private void UpdatePCMLASynthControls()
+    {
+        bool isPCM = comboBoxWaveform.SelectedIndex == 1; // 0=LA Synth, 1=PCM
+        if (isPCM)
+            ShowOnlyPCMControls();
+        else
+            ShowOnlyLASynthControls();
+    }
+
+    /// <summary>
+    /// Enables PCM-specific controls and disables LA synth/TVF controls.
+    /// Matches WinForms FormTimbreEditor.ShowOnlyPCMControls().
+    /// </summary>
+    private void ShowOnlyPCMControls()
+    {
+        comboBoxWaveform.IsEnabled = false;
+        comboBoxPCMSample.IsEnabled = true;
+        radioButtonPCMBankA.IsEnabled = true;
+        radioButtonPCMBankB.IsEnabled = true;
+        labelTVFDisabled.IsVisible = true;
+
+        // Disable all TVF sliders (parameters 0x17 through 0x28)
+        for (int p = 0x17; p <= 0x28; p++)
+        {
+            if (sliders[p] is not null)
+                sliders[p]!.IsEnabled = false;
+        }
+
+        UpdateAllGraphs();
+    }
+
+    /// <summary>
+    /// Enables LA synth/TVF controls and disables PCM-specific controls.
+    /// Matches WinForms FormTimbreEditor.ShowOnlyLASynthControls().
+    /// </summary>
+    private void ShowOnlyLASynthControls()
+    {
+        comboBoxWaveform.IsEnabled = true;
+        comboBoxPCMSample.IsEnabled = false;
+        radioButtonPCMBankA.IsEnabled = false;
+        radioButtonPCMBankB.IsEnabled = false;
+        labelTVFDisabled.IsVisible = false;
+
+        // Enable all TVF sliders (parameters 0x17 through 0x28)
+        for (int p = 0x17; p <= 0x28; p++)
+        {
+            if (sliders[p] is not null)
+                sliders[p]!.IsEnabled = true;
+        }
+
+        UpdateAllGraphs();
+    }
+
+    /// <summary>
+    /// Shows Save As dialog and saves timbre file.
+    /// Matches WinForms FormTimbreEditor.SaveTimbreAs().
+    /// </summary>
+    private void SaveTimbreAs()
+    {
+        string? filePath = PlatformServices.FileDialog.ShowSaveFileDialog("Save Timbre File", "Timbre file|*.timbre", timbre.GetTimbreName());
+        if (filePath is not null)
+        {
+            var fs = File.Create(filePath);
+            TimbreFile.SaveTimbreParameters(timbre, fs);
+            TimbreFile.SavePartials(timbre, fs);
+            fs.Close();
+            lastSavedTimbreFilePath = filePath;
+            allowQuickSave = true;
+            buttonQuickSave.IsEnabled = true;
+        }
+    }
+
+    /// <summary>
+    /// Saves timbre to last used file path without showing dialog.
+    /// If no file has been previously saved, falls back to SaveTimbreAs().
+    /// Matches WinForms FormTimbreEditor.QuickSaveTimbre().
+    /// </summary>
+    private void QuickSaveTimbre()
+    {
+        if (!allowQuickSave || string.IsNullOrEmpty(lastSavedTimbreFilePath))
+        {
+            SaveTimbreAs();
+            return;
+        }
+
+        string action = File.Exists(lastSavedTimbreFilePath) ? "Overwrite" : "Save";
+        if (PlatformServices.Notification.AskUserToConfirm($"{action} file {lastSavedTimbreFilePath}?", "MT-32 Editor"))
+        {
+            var fs = File.Create(lastSavedTimbreFilePath);
+            TimbreFile.SaveTimbreParameters(timbre, fs);
+            TimbreFile.SavePartials(timbre, fs);
+            fs.Close();
+            timbreHistory.Clear(timbre);
+        }
     }
 }
