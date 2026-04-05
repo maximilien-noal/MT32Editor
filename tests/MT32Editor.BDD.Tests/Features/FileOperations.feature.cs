@@ -17,21 +17,22 @@ namespace MT32Editor.BDD.Tests.Features
     
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Reqnroll", "3.0.0.0")]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class MemoryBankEditorFeature : object, global::Xunit.IClassFixture<MemoryBankEditorFeature.FixtureData>, global::Xunit.IAsyncLifetime
+    public partial class FileOperationsFeature : object, global::Xunit.IClassFixture<FileOperationsFeature.FixtureData>, global::Xunit.IAsyncLifetime
     {
         
         private global::Reqnroll.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "Memory Bank Editor", "    The memory bank editor allows managing 64 custom timbres in MT-32 memory.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
+        private static global::Reqnroll.FeatureInfo featureInfo = new global::Reqnroll.FeatureInfo(new global::System.Globalization.CultureInfo("en-US"), "Features", "File Operations", "    File operations handle saving and loading of timbre files, SysEx files,\n    a" +
+                "nd configuration. Both WinForms and Avalonia must handle files identically.", global::Reqnroll.ProgrammingLanguage.CSharp, featureTags, InitializeCucumberMessages());
         
         private global::Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "MemoryBankEditor.feature"
+#line 1 "FileOperations.feature"
 #line hidden
         
-        public MemoryBankEditorFeature(MemoryBankEditorFeature.FixtureData fixtureData, global::Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FileOperationsFeature(FileOperationsFeature.FixtureData fixtureData, global::Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
         }
@@ -105,7 +106,7 @@ namespace MT32Editor.BDD.Tests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/MemoryBankEditor.feature.ndjson", 10);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/FileOperations.feature.ndjson", 10);
         }
         
         async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.InitializeAsync()
@@ -133,18 +134,18 @@ namespace MT32Editor.BDD.Tests.Features
             await this.TestTearDownAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Initial memory bank has 64 slots")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Initial memory bank has 64 slots")]
-        public async global::System.Threading.Tasks.Task InitialMemoryBankHas64Slots()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Title bar shows application name")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "Title bar shows application name")]
+        public async global::System.Threading.Tasks.Task TitleBarShowsApplicationName()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "0";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Initial memory bank has 64 slots", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Title bar shows application name", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 4
+#line 5
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -154,28 +155,25 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 5
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
 #line 6
-        await testRunner.ThenAsync("the memory bank should have 64 timbre slots", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+        await testRunner.GivenAsync("a new MT-32 state is initialized for file operations", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 7
-        await testRunner.AndAsync("each memory timbre should be accessible", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+        await testRunner.ThenAsync("the title bar text should contain \"MT-32 Editor\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Store and retrieve a custom timbre")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Store and retrieve a custom timbre")]
-        public async global::System.Threading.Tasks.Task StoreAndRetrieveACustomTimbre()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Title bar shows loaded filename")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "Title bar shows loaded filename")]
+        public async global::System.Threading.Tasks.Task TitleBarShowsLoadedFilename()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "1";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Store and retrieve a custom timbre", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Title bar shows loaded filename", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
 #line 9
@@ -189,36 +187,30 @@ namespace MT32Editor.BDD.Tests.Features
             {
                 await this.ScenarioStartAsync();
 #line 10
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+        await testRunner.GivenAsync("a new MT-32 state is initialized for file operations", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
 #line 11
-        await testRunner.WhenAsync("I create a custom timbre named \"MySynth\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+        await testRunner.WhenAsync("I set the title bar filename to \"mysound.syx\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
 #line 12
-        await testRunner.AndAsync("I store it in memory slot 10", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 13
-        await testRunner.ThenAsync("memory slot 10 should contain the timbre", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 14
-        await testRunner.AndAsync("the timbre in slot 10 should be named \"MySynth\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+        await testRunner.ThenAsync("the title bar text should contain \"mysound.syx\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Select memory timbre")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Select memory timbre")]
-        public async global::System.Threading.Tasks.Task SelectMemoryTimbre()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Title bar shows description from message")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "Title bar shows description from message")]
+        public async global::System.Threading.Tasks.Task TitleBarShowsDescriptionFromMessage()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "2";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Select memory timbre", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Title bar shows description from message", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 16
+#line 14
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -228,31 +220,31 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
+#line 15
+        await testRunner.GivenAsync("a new MT-32 state is initialized for file operations", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 16
+        await testRunner.WhenAsync("I set the system message to \"My MT-32 Setup\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
 #line 17
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 18
-        await testRunner.WhenAsync("I select memory timbre 32", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 19
-        await testRunner.ThenAsync("the selected memory timbre should be 32", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+        await testRunner.ThenAsync("the title bar text should contain \"My MT-32 Setup\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Copy and paste timbre between memory slots")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Copy and paste timbre between memory slots")]
-        public async global::System.Threading.Tasks.Task CopyAndPasteTimbreBetweenMemorySlots()
+        [global::Xunit.SkippableFactAttribute(DisplayName="FileTools validates SysEx file extension")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "FileTools validates SysEx file extension")]
+        public async global::System.Threading.Tasks.Task FileToolsValidatesSysExFileExtension()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "3";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Copy and paste timbre between memory slots", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("FileTools validates SysEx file extension", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 21
+#line 19
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -262,37 +254,31 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
+#line 20
+        await testRunner.ThenAsync("\".syx\" should be a valid SysEx extension", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 21
+        await testRunner.AndAsync("\".mid\" should be a valid MIDI extension", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
 #line 22
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 23
-        await testRunner.WhenAsync("I create a custom timbre named \"CopyMe\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 24
-        await testRunner.AndAsync("I store it in memory slot 5", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 25
-        await testRunner.AndAsync("I copy memory timbre from slot 5 to slot 20", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 26
-        await testRunner.ThenAsync("the timbre in slot 20 should be named \"CopyMe\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+        await testRunner.AndAsync("\".txt\" should not be a valid SysEx or MIDI extension", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Clear a memory timbre slot")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Clear a memory timbre slot")]
-        public async global::System.Threading.Tasks.Task ClearAMemoryTimbreSlot()
+        [global::Xunit.SkippableFactAttribute(DisplayName="ParseTools version extraction")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "ParseTools version extraction")]
+        public async global::System.Threading.Tasks.Task ParseToolsVersionExtraction()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "4";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Clear a memory timbre slot", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("ParseTools version extraction", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 28
+#line 24
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -302,37 +288,25 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 29
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
-#line hidden
-#line 30
-        await testRunner.WhenAsync("I create a custom timbre named \"ToBeCleared\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 31
-        await testRunner.AndAsync("I store it in memory slot 3", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 32
-        await testRunner.AndAsync("I clear memory slot 3", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 33
-        await testRunner.ThenAsync("memory slot 3 should be empty", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 25
+        await testRunner.ThenAsync("ParseTools should extract a valid version string", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Memory bank stores timbre names correctly")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Memory bank stores timbre names correctly")]
-        public async global::System.Threading.Tasks.Task MemoryBankStoresTimbreNamesCorrectly()
+        [global::Xunit.SkippableFactAttribute(DisplayName="LogicTools boolean conversion roundtrip")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "LogicTools boolean conversion roundtrip")]
+        public async global::System.Threading.Tasks.Task LogicToolsBooleanConversionRoundtrip()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "5";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Memory bank stores timbre names correctly", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("LogicTools boolean conversion roundtrip", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 35
+#line 27
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -342,34 +316,34 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 36
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 28
+        await testRunner.ThenAsync("converting true to int should give 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 37
-        await testRunner.WhenAsync("I create a custom timbre named \"TestPad\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 29
+        await testRunner.AndAsync("converting false to int should give 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 38
-        await testRunner.AndAsync("I store it in memory slot 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 30
+        await testRunner.AndAsync("converting 1 to bool should give true", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
-#line 39
-        await testRunner.ThenAsync("the timbre names list should contain \"TestPad\" at memory position 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 31
+        await testRunner.AndAsync("converting 0 to bool should give false", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Multiple timbres in different slots")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Multiple timbres in different slots")]
-        public async global::System.Threading.Tasks.Task MultipleTimbresInDifferentSlots()
+        [global::Xunit.SkippableFactAttribute(DisplayName="ParseTools string padding")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "ParseTools string padding")]
+        public async global::System.Threading.Tasks.Task ParseToolsStringPadding()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "6";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Multiple timbres in different slots", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("ParseTools string padding", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 41
+#line 33
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -379,43 +353,28 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 42
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 34
+        await testRunner.WhenAsync("I pad \"AB\" to 10 characters", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 43
-        await testRunner.WhenAsync("I create a custom timbre named \"Bass\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
-#line hidden
-#line 44
-        await testRunner.AndAsync("I store it in memory slot 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 45
-        await testRunner.AndAsync("I create a custom timbre named \"Lead\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 46
-        await testRunner.AndAsync("I store it in memory slot 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
-#line hidden
-#line 47
-        await testRunner.ThenAsync("the timbre in slot 0 should be named \"Bass\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
-#line hidden
-#line 48
-        await testRunner.AndAsync("the timbre in slot 1 should be named \"Lead\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line 35
+        await testRunner.ThenAsync("the padded string should be exactly 10 characters long", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
         }
         
-        [global::Xunit.SkippableFactAttribute(DisplayName="Selected memory timbre boundary values")]
-        [global::Xunit.TraitAttribute("FeatureTitle", "Memory Bank Editor")]
-        [global::Xunit.TraitAttribute("Description", "Selected memory timbre boundary values")]
-        public async global::System.Threading.Tasks.Task SelectedMemoryTimbreBoundaryValues()
+        [global::Xunit.SkippableFactAttribute(DisplayName="Config file persistence")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "File Operations")]
+        [global::Xunit.TraitAttribute("Description", "Config file persistence")]
+        public async global::System.Threading.Tasks.Task ConfigFilePersistence()
         {
             string[] tagsOfScenario = ((string[])(null));
             global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
             string pickleIndex = "7";
-            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Selected memory timbre boundary values", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Config file persistence", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
             string[] tagsOfRule = ((string[])(null));
             global::Reqnroll.RuleInfo ruleInfo = null;
-#line 50
+#line 37
     this.ScenarioInitialize(scenarioInfo, ruleInfo);
 #line hidden
             if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
@@ -425,20 +384,20 @@ namespace MT32Editor.BDD.Tests.Features
             else
             {
                 await this.ScenarioStartAsync();
-#line 51
-        await testRunner.GivenAsync("a new MT-32 state is initialized", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line 38
+        await testRunner.GivenAsync("a fresh config state", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
 #line hidden
-#line 52
-        await testRunner.WhenAsync("I select memory timbre 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 39
+        await testRunner.WhenAsync("I set dark mode to true", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 53
-        await testRunner.ThenAsync("the selected memory timbre should be 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 40
+        await testRunner.ThenAsync("dark mode should be true", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
-#line 54
-        await testRunner.WhenAsync("I select memory timbre 63", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line 41
+        await testRunner.WhenAsync("I set dark mode to false", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
 #line hidden
-#line 55
-        await testRunner.ThenAsync("the selected memory timbre should be 63", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line 42
+        await testRunner.ThenAsync("dark mode should be false", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();
@@ -451,12 +410,12 @@ namespace MT32Editor.BDD.Tests.Features
             
             async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.InitializeAsync()
             {
-                await MemoryBankEditorFeature.FeatureSetupAsync();
+                await FileOperationsFeature.FeatureSetupAsync();
             }
             
             async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.DisposeAsync()
             {
-                await MemoryBankEditorFeature.FeatureTearDownAsync();
+                await FileOperationsFeature.FeatureTearDownAsync();
             }
         }
     }

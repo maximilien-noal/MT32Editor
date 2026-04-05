@@ -89,4 +89,14 @@ public class MemoryBankEditorSteps
         Assert.True(name.Length == 0 || name == MT32Strings.EMPTY,
             $"Expected empty timbre but got '{name}'");
     }
+
+    [Then("the timbre names list should contain {string} at memory position {int}")]
+    public void ThenTheTimbreNamesListShouldContainAtMemoryPosition(string expected, int position)
+    {
+        var names = _state.GetTimbreNames();
+        names.SetMemoryTimbreName(_state.GetMemoryTimbre(position).GetTimbreName(), position);
+        // Memory group is group 2 (after Preset A=0, Preset B=1)
+        string name = names.Get(position, 2);
+        Assert.StartsWith(expected, name);
+    }
 }

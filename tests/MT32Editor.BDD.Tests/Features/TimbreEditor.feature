@@ -113,3 +113,124 @@ Feature: Timbre Editor
     Scenario: All 58 partial parameters have valid defaults
         Given a new timbre editor is opened
         Then all 58 parameters for partial 0 should have valid values
+
+    Scenario Outline: Set pitch envelope parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 6       | 80    |
+            | 7       | 10    |
+            | 8       | 5     |
+            | 9       | 70    |
+            | 10      | 3     |
+
+    Scenario Outline: Set pitch envelope time and level parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 11      | 50    |
+            | 12      | 60    |
+            | 13      | 70    |
+            | 14      | 80    |
+            | 15      | 90    |
+            | 16      | 40    |
+            | 17      | 30    |
+            | 18      | 65    |
+            | 19      | 55    |
+
+    Scenario Outline: Set TVF bias and keyfollow parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 26      | 64    |
+            | 27      | 10    |
+            | 28      | 75    |
+            | 29      | 50    |
+            | 30      | 3     |
+            | 31      | 2     |
+
+    Scenario Outline: Set TVF envelope time and level parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 32      | 90    |
+            | 33      | 80    |
+            | 34      | 70    |
+            | 35      | 60    |
+            | 36      | 50    |
+            | 37      | 40    |
+            | 38      | 30    |
+            | 39      | 20    |
+            | 40      | 55    |
+
+    Scenario Outline: Set TVA bias and envelope parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 44      | 10    |
+            | 45      | 64    |
+            | 46      | 8     |
+            | 47      | 3     |
+            | 48      | 2     |
+
+    Scenario Outline: Set TVA envelope time and level parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 49      | 90    |
+            | 50      | 80    |
+            | 51      | 70    |
+            | 52      | 60    |
+            | 53      | 50    |
+            | 54      | 40    |
+            | 55      | 30    |
+            | 56      | 20    |
+            | 57      | 55    |
+
+    Scenario: Clone timbre preserves all parameters
+        Given a new timbre editor is opened
+        When I set the timbre name to "Original"
+        And I clone the timbre
+        Then the cloned timbre should have name starting with "Original"
+        And all parameters across all partials should match the original
+
+    Scenario: Timbre name is truncated to max 10 characters
+        Given a new timbre editor is opened
+        When I set the timbre name to "VeryLongTimbreName"
+        Then the timbre name should start with "VeryLongTi"
+
+    Scenario: Set structure 3-4
+        Given a new timbre editor is opened
+        When I set structure 3-4 to 8
+        Then structure 3-4 should be 8
+
+    Scenario: Set PCM sample parameter
+        Given a new timbre editor is opened
+        When I set parameter 5 on partial 0 to 42
+        Then parameter 5 on partial 0 should be 42
+
+    Scenario: Mute all partials
+        Given a new timbre editor is opened
+        When I mute partial 0
+        And I mute partial 1
+        And I mute partial 2
+        And I mute partial 3
+        Then all partials should be muted

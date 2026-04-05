@@ -92,4 +92,10 @@ public class RhythmEditorSteps
     {
         Assert.False(_rhythm.GetReverbEnabled());
     }
+
+    [Then("the rhythm timbre group type should be {string}")]
+    public void ThenTheRhythmTimbreGroupTypeShouldBe(string expected)
+    {
+        Assert.Equal(expected, _rhythm.GetTimbreGroupType());
+    }
 }

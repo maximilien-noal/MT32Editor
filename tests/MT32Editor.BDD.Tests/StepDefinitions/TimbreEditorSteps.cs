@@ -9,6 +9,7 @@ public class TimbreEditorSteps
     private TimbreStructure _timbre = null!;
     private TimbreHistory _history = null!;
     private TimbreStructure _originalTimbre = null!;
+    private TimbreStructure? _clonedTimbre;
     private byte[]? _copiedPartial;
 
     [Given("a new timbre editor is opened")]
@@ -245,6 +246,55 @@ public class TimbreEditorSteps
             int value = _timbre.GetUIParameter(partial, p);
             // Value should not throw and should be retrievable
             Assert.True(value >= -128 && value <= 255, $"Parameter {p} has unexpected value {value}");
+        }
+    }
+
+    // Clone timbre
+    [When("I clone the timbre")]
+    public void WhenICloneTheTimbre()
+    {
+        _clonedTimbre = _timbre.Clone();
+    }
+
+    [Then("the cloned timbre should have name starting with {string}")]
+    public void ThenTheClonedTimbreShouldHaveNameStartingWith(string expected)
+    {
+        Assert.StartsWith(expected, _clonedTimbre!.GetTimbreName());
+    }
+
+    [Then("all parameters across all partials should match the original")]
+    public void ThenAllParametersAcrossAllPartialsShouldMatchTheOriginal()
+    {
+        for (int partial = 0; partial < TimbreConstants.NO_OF_PARTIALS; partial++)
+        {
+            for (int p = 0; p < TimbreConstants.NO_OF_PARTIAL_PARAMETERS; p++)
+            {
+                Assert.Equal(_timbre.GetUIParameter(partial, p), _clonedTimbre!.GetUIParameter(partial, p));
+            }
+        }
+    }
+
+    // Structure 3-4
+    [When(@"I set structure 3-4 to (\d+)")]
+    public void WhenISetStructure34To(int value)
+    {
+        _timbre.SetPart34Structure(value);
+    }
+
+    [Then(@"structure 3-4 should be (\d+)")]
+    public void ThenStructure34ShouldBe(int expected)
+    {
+        Assert.Equal(expected, _timbre.GetPart34Structure());
+    }
+
+    // All partials muted
+    [Then("all partials should be muted")]
+    public void ThenAllPartialsShouldBeMuted()
+    {
+        bool[] status = _timbre.GetPartialMuteStatus();
+        for (int i = 0; i < TimbreConstants.NO_OF_PARTIALS; i++)
+        {
+            Assert.True(status[i], $"Partial {i} should be muted");
         }
     }
 }

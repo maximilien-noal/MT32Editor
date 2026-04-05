@@ -106,7 +106,7 @@ namespace MT32Editor.BDD.Tests.Features
         
         private static global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages InitializeCucumberMessages()
         {
-            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/TimbreEditor.feature.ndjson", 25);
+            return new global::Reqnroll.Formatters.RuntimeSupport.FeatureLevelCucumberMessages("Features/TimbreEditor.feature.ndjson", 73);
         }
         
         async global::System.Threading.Tasks.Task global::Xunit.IAsyncLifetime.InitializeAsync()
@@ -698,6 +698,450 @@ namespace MT32Editor.BDD.Tests.Features
 #line hidden
 #line 115
         await testRunner.ThenAsync("all 58 parameters for partial 0 should have valid values", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set pitch envelope parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set pitch envelope parameters")]
+        [global::Xunit.InlineDataAttribute("6", "80", "23", new string[0])]
+        [global::Xunit.InlineDataAttribute("7", "10", "24", new string[0])]
+        [global::Xunit.InlineDataAttribute("8", "5", "25", new string[0])]
+        [global::Xunit.InlineDataAttribute("9", "70", "26", new string[0])]
+        [global::Xunit.InlineDataAttribute("10", "3", "27", new string[0])]
+        public async global::System.Threading.Tasks.Task SetPitchEnvelopeParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set pitch envelope parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 117
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 118
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 119
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 120
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set pitch envelope time and level parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set pitch envelope time and level parameters")]
+        [global::Xunit.InlineDataAttribute("11", "50", "28", new string[0])]
+        [global::Xunit.InlineDataAttribute("12", "60", "29", new string[0])]
+        [global::Xunit.InlineDataAttribute("13", "70", "30", new string[0])]
+        [global::Xunit.InlineDataAttribute("14", "80", "31", new string[0])]
+        [global::Xunit.InlineDataAttribute("15", "90", "32", new string[0])]
+        [global::Xunit.InlineDataAttribute("16", "40", "33", new string[0])]
+        [global::Xunit.InlineDataAttribute("17", "30", "34", new string[0])]
+        [global::Xunit.InlineDataAttribute("18", "65", "35", new string[0])]
+        [global::Xunit.InlineDataAttribute("19", "55", "36", new string[0])]
+        public async global::System.Threading.Tasks.Task SetPitchEnvelopeTimeAndLevelParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set pitch envelope time and level parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 130
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 131
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 132
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 133
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set TVF bias and keyfollow parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set TVF bias and keyfollow parameters")]
+        [global::Xunit.InlineDataAttribute("26", "64", "37", new string[0])]
+        [global::Xunit.InlineDataAttribute("27", "10", "38", new string[0])]
+        [global::Xunit.InlineDataAttribute("28", "75", "39", new string[0])]
+        [global::Xunit.InlineDataAttribute("29", "50", "40", new string[0])]
+        [global::Xunit.InlineDataAttribute("30", "3", "41", new string[0])]
+        [global::Xunit.InlineDataAttribute("31", "2", "42", new string[0])]
+        public async global::System.Threading.Tasks.Task SetTVFBiasAndKeyfollowParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set TVF bias and keyfollow parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 147
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 148
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 149
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 150
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set TVF envelope time and level parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set TVF envelope time and level parameters")]
+        [global::Xunit.InlineDataAttribute("32", "90", "43", new string[0])]
+        [global::Xunit.InlineDataAttribute("33", "80", "44", new string[0])]
+        [global::Xunit.InlineDataAttribute("34", "70", "45", new string[0])]
+        [global::Xunit.InlineDataAttribute("35", "60", "46", new string[0])]
+        [global::Xunit.InlineDataAttribute("36", "50", "47", new string[0])]
+        [global::Xunit.InlineDataAttribute("37", "40", "48", new string[0])]
+        [global::Xunit.InlineDataAttribute("38", "30", "49", new string[0])]
+        [global::Xunit.InlineDataAttribute("39", "20", "50", new string[0])]
+        [global::Xunit.InlineDataAttribute("40", "55", "51", new string[0])]
+        public async global::System.Threading.Tasks.Task SetTVFEnvelopeTimeAndLevelParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set TVF envelope time and level parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 161
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 162
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 163
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 164
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set TVA bias and envelope parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set TVA bias and envelope parameters")]
+        [global::Xunit.InlineDataAttribute("44", "10", "52", new string[0])]
+        [global::Xunit.InlineDataAttribute("45", "64", "53", new string[0])]
+        [global::Xunit.InlineDataAttribute("46", "8", "54", new string[0])]
+        [global::Xunit.InlineDataAttribute("47", "3", "55", new string[0])]
+        [global::Xunit.InlineDataAttribute("48", "2", "56", new string[0])]
+        public async global::System.Threading.Tasks.Task SetTVABiasAndEnvelopeParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set TVA bias and envelope parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 178
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 179
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 180
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 181
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableTheoryAttribute(DisplayName="Set TVA envelope time and level parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set TVA envelope time and level parameters")]
+        [global::Xunit.InlineDataAttribute("49", "90", "57", new string[0])]
+        [global::Xunit.InlineDataAttribute("50", "80", "58", new string[0])]
+        [global::Xunit.InlineDataAttribute("51", "70", "59", new string[0])]
+        [global::Xunit.InlineDataAttribute("52", "60", "60", new string[0])]
+        [global::Xunit.InlineDataAttribute("53", "50", "61", new string[0])]
+        [global::Xunit.InlineDataAttribute("54", "40", "62", new string[0])]
+        [global::Xunit.InlineDataAttribute("55", "30", "63", new string[0])]
+        [global::Xunit.InlineDataAttribute("56", "20", "64", new string[0])]
+        [global::Xunit.InlineDataAttribute("57", "55", "65", new string[0])]
+        public async global::System.Threading.Tasks.Task SetTVAEnvelopeTimeAndLevelParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("paramNo", paramNo);
+            argumentsOfScenario.Add("value", value);
+            string pickleIndex = @__pickleIndex;
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set TVA envelope time and level parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 191
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 192
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 193
+        await testRunner.WhenAsync(string.Format("I set parameter {0} on partial 0 to {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 194
+        await testRunner.ThenAsync(string.Format("parameter {0} on partial 0 should be {1}", paramNo, value), ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableFactAttribute(DisplayName="Clone timbre preserves all parameters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Clone timbre preserves all parameters")]
+        public async global::System.Threading.Tasks.Task CloneTimbrePreservesAllParameters()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "66";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Clone timbre preserves all parameters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 208
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 209
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 210
+        await testRunner.WhenAsync("I set the timbre name to \"Original\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 211
+        await testRunner.AndAsync("I clone the timbre", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 212
+        await testRunner.ThenAsync("the cloned timbre should have name starting with \"Original\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+#line 213
+        await testRunner.AndAsync("all parameters across all partials should match the original", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableFactAttribute(DisplayName="Timbre name is truncated to max 10 characters")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Timbre name is truncated to max 10 characters")]
+        public async global::System.Threading.Tasks.Task TimbreNameIsTruncatedToMax10Characters()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "67";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Timbre name is truncated to max 10 characters", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 215
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 216
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 217
+        await testRunner.WhenAsync("I set the timbre name to \"VeryLongTimbreName\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 218
+        await testRunner.ThenAsync("the timbre name should start with \"VeryLongTi\"", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableFactAttribute(DisplayName="Set structure 3-4")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set structure 3-4")]
+        public async global::System.Threading.Tasks.Task SetStructure3_4()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "68";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set structure 3-4", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 220
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 221
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 222
+        await testRunner.WhenAsync("I set structure 3-4 to 8", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 223
+        await testRunner.ThenAsync("structure 3-4 should be 8", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableFactAttribute(DisplayName="Set PCM sample parameter")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Set PCM sample parameter")]
+        public async global::System.Threading.Tasks.Task SetPCMSampleParameter()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "69";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Set PCM sample parameter", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 225
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 226
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 227
+        await testRunner.WhenAsync("I set parameter 5 on partial 0 to 42", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 228
+        await testRunner.ThenAsync("parameter 5 on partial 0 should be 42", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
+#line hidden
+            }
+            await this.ScenarioCleanupAsync();
+        }
+        
+        [global::Xunit.SkippableFactAttribute(DisplayName="Mute all partials")]
+        [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
+        [global::Xunit.TraitAttribute("Description", "Mute all partials")]
+        public async global::System.Threading.Tasks.Task MuteAllPartials()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            global::System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new global::System.Collections.Specialized.OrderedDictionary();
+            string pickleIndex = "70";
+            global::Reqnroll.ScenarioInfo scenarioInfo = new global::Reqnroll.ScenarioInfo("Mute all partials", null, tagsOfScenario, argumentsOfScenario, featureTags, pickleIndex);
+            string[] tagsOfRule = ((string[])(null));
+            global::Reqnroll.RuleInfo ruleInfo = null;
+#line 230
+    this.ScenarioInitialize(scenarioInfo, ruleInfo);
+#line hidden
+            if ((global::Reqnroll.TagHelper.ContainsIgnoreTag(scenarioInfo.CombinedTags) || global::Reqnroll.TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                await testRunner.SkipScenarioAsync();
+            }
+            else
+            {
+                await this.ScenarioStartAsync();
+#line 231
+        await testRunner.GivenAsync("a new timbre editor is opened", ((string)(null)), ((global::Reqnroll.Table)(null)), "Given ");
+#line hidden
+#line 232
+        await testRunner.WhenAsync("I mute partial 0", ((string)(null)), ((global::Reqnroll.Table)(null)), "When ");
+#line hidden
+#line 233
+        await testRunner.AndAsync("I mute partial 1", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 234
+        await testRunner.AndAsync("I mute partial 2", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 235
+        await testRunner.AndAsync("I mute partial 3", ((string)(null)), ((global::Reqnroll.Table)(null)), "And ");
+#line hidden
+#line 236
+        await testRunner.ThenAsync("all partials should be muted", ((string)(null)), ((global::Reqnroll.Table)(null)), "Then ");
 #line hidden
             }
             await this.ScenarioCleanupAsync();

@@ -40,3 +40,20 @@ Feature: Patch Editor
         Then patch reverb should be enabled
         When I disable patch reverb
         Then patch reverb should be disabled
+
+    Scenario: Timbre group types match expected names
+        Given a new patch is created for slot 0
+        When I set the timbre group to 0
+        Then the timbre group type should be "Preset A"
+        When I set the timbre group to 1
+        Then the timbre group type should be "Preset B"
+        When I set the timbre group to 2
+        Then the timbre group type should be "Memory"
+        When I set the timbre group to 3
+        Then the timbre group type should be "Rhythm"
+
+    Scenario: Default patch has sensible initial values
+        Given a new patch is created for slot 0
+        Then key shift should be 0
+        And fine tune should be 0
+        And bender range should be 12
