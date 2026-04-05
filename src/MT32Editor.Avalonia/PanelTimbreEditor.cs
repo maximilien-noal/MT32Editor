@@ -261,26 +261,36 @@ public class PanelTimbreEditor : UserControl
         DockPanel.SetDock(graphPanel, Dock.Bottom);
         rootPanel.Children.Add(graphPanel);
 
-        // Main parameter area — scrollable grid of sliders
+        // Main parameter area — scrollable 4-column grid matching WinForms layout
         var scrollViewer = new ScrollViewer { HorizontalScrollBarVisibility = global::Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled };
-        var paramPanel = new WrapPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(5) };
+        var paramGrid = new Grid { Margin = new Thickness(5) };
+        paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
 
-        // Create parameter sliders organized by group
-        CreateSliderGroup(paramPanel, "Pitch", new[] {
+        // Column 0: Pitch
+        var pitchCol = CreateSliderColumn("Pitch", new SolidColorBrush(Color.FromRgb(221, 160, 221)), new[] {
             (0x01, "Fine Pitch", 0, 100),
             (0x02, "Key Follow", 0, 16),
             (0x07, "Pitch Coarse", 0, 96),
             (0x08, "Pitch Fine", 0, 100),
             (0x09, "Pitch Bend", 0, 1),
         });
+        Grid.SetColumn(pitchCol, 0);
+        paramGrid.Children.Add(pitchCol);
 
-        CreateSliderGroup(paramPanel, "Pitch Envelope", new[] {
+        // Column 1: Pitch Envelope
+        var pitchEnvCol = CreateSliderColumn("Pitch Envelope", new SolidColorBrush(Color.FromRgb(221, 160, 221)), new[] {
             (0x0B, "T1", 0, 100), (0x0C, "T2", 0, 100), (0x0D, "T3", 0, 100), (0x0E, "T4", 0, 100),
             (0x0F, "L0", 0, 100), (0x10, "L1", 0, 100), (0x11, "L2", 0, 100),
             (0x12, "Sustain Level", 0, 100), (0x13, "Release Level", 0, 100),
         });
+        Grid.SetColumn(pitchEnvCol, 1);
+        paramGrid.Children.Add(pitchEnvCol);
 
-        CreateSliderGroup(paramPanel, "TVF (Filter)", new[] {
+        // Column 2: TVF (Filter)
+        var tvfCol = CreateSliderColumn("TVF (Filter)", new SolidColorBrush(Color.FromRgb(240, 230, 140)), new[] {
             (0x14, "Cutoff Freq", 0, 100), (0x15, "Resonance", 0, 30), (0x16, "Key Follow", 0, 14),
             (0x17, "Bias Point", 0, 127), (0x18, "Bias Level", 0, 14),
             (0x19, "Env Depth", 0, 100), (0x1A, "Env V-Sens", 0, 100),
@@ -289,8 +299,11 @@ public class PanelTimbreEditor : UserControl
             (0x20, "T1", 0, 100), (0x21, "T2", 0, 100), (0x22, "T3", 0, 100), (0x23, "T4", 0, 100), (0x24, "T5", 0, 100),
             (0x25, "L1", 0, 100), (0x26, "L2", 0, 100), (0x27, "L3", 0, 100), (0x28, "Sustain", 0, 100),
         });
+        Grid.SetColumn(tvfCol, 2);
+        paramGrid.Children.Add(tvfCol);
 
-        CreateSliderGroup(paramPanel, "TVA (Amplifier)", new[] {
+        // Column 3: TVA (Amplifier)
+        var tvaCol = CreateSliderColumn("TVA (Amplifier)", new SolidColorBrush(Color.FromRgb(72, 209, 204)), new[] {
             (0x29, "Level", 0, 100), (0x2A, "V-Sensitivity", 0, 100),
             (0x2B, "Bias Point 1", 0, 127), (0x2C, "Bias Level 1", 0, 12),
             (0x2D, "Bias Point 2", 0, 127), (0x2E, "Bias Level 2", 0, 12),
@@ -298,8 +311,10 @@ public class PanelTimbreEditor : UserControl
             (0x31, "T1", 0, 100), (0x32, "T2", 0, 100), (0x33, "T3", 0, 100), (0x34, "T4", 0, 100), (0x35, "T5", 0, 100),
             (0x36, "L1", 0, 100), (0x37, "L2", 0, 100), (0x38, "L3", 0, 100), (0x39, "Sustain", 0, 100),
         });
+        Grid.SetColumn(tvaCol, 3);
+        paramGrid.Children.Add(tvaCol);
 
-        scrollViewer.Content = paramPanel;
+        scrollViewer.Content = paramGrid;
         rootPanel.Children.Add(scrollViewer);
 
         Content = rootPanel;
@@ -313,14 +328,14 @@ public class PanelTimbreEditor : UserControl
         initialised = true;
     }
 
-    private void CreateSliderGroup(WrapPanel parent, string groupName, (int paramNo, string name, int min, int max)[] parameters)
+    private StackPanel CreateSliderColumn(string groupName, IBrush headerBrush, (int paramNo, string name, int min, int max)[] parameters)
     {
-        var groupPanel = new StackPanel { Margin = new Thickness(3), MinWidth = 160 };
-        groupPanel.Children.Add(new TextBlock { Text = groupName, FontWeight = FontWeight.Bold, Foreground = AvaloniaUITools.GetTitleBrush(), Margin = new Thickness(0, 2) });
+        var groupPanel = new StackPanel { Margin = new Thickness(3) };
+        groupPanel.Children.Add(new TextBlock { Text = groupName, FontWeight = FontWeight.Bold, Foreground = headerBrush, Margin = new Thickness(0, 2), FontSize = 13 });
 
         foreach (var (paramNo, name, min, max) in parameters)
         {
-            var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 5, Margin = new Thickness(0, 1) };
+            var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 4, Margin = new Thickness(0, 1) };
 
             var label = new TextBlock { Text = name, Width = 90, FontSize = 11, VerticalAlignment = VerticalAlignment.Center, Foreground = AvaloniaUITools.GetForegroundBrush() };
             sliderLabels[paramNo] = label;
@@ -351,7 +366,7 @@ public class PanelTimbreEditor : UserControl
             groupPanel.Children.Add(row);
         }
 
-        parent.Children.Add(groupPanel);
+        return groupPanel;
     }
 
     private void PopulatePCMSamples()
