@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MT32Edit</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="MT32Editor.Avalonia" />
+    <InternalsVisibleTo Include="MT32Editor.Core.Tests" />
+    <InternalsVisibleTo Include="MT32Editor.BDD.Tests" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NAudio.Midi" Version="2.3.0" />
+  </ItemGroup>
+</Project>

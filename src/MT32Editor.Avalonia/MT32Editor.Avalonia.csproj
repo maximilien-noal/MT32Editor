@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MT32Edit.Avalonia</RootNamespace>
+    <Product>MT32 Editor (Avalonia)</Product>
+    <Version>1.1.0.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Copyright>Copyright © 2026 S.Fryers. Licenced under GPL3</Copyright>
+    <ApplicationIcon>../MT32Editor/MT32Edit.ico</ApplicationIcon>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.13" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.13" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.13" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.13" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../MT32Editor.Core/MT32Editor.Core.csproj" />
+  </ItemGroup>
+</Project>
