@@ -17,7 +17,7 @@ internal class TimbreHistory
     public TimbreHistory(TimbreStructure initialTimbreState)
     {
         actionNo = 0;
-        topOfStack = -1;
+        topOfStack = 0;
         timbreHistory = new TimbreStructure[MAXIMUM_STACK_SIZE];
         timbreHistory[0] = initialTimbreState.Clone();
     }
@@ -97,10 +97,6 @@ internal class TimbreHistory
     /// </summary>
     public void Clear(TimbreStructure timbreState)
     {
-        if (topOfStack == -1)
-        {
-            return;
-        }
         actionNo = 0;
         topOfStack = 0;
         timbreHistory[0] = timbreState.Clone();

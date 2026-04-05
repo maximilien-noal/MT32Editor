@@ -18,7 +18,7 @@ internal static class InstrumentDefinition
         fileName = Path.ChangeExtension(fileName, FileTools.INSTRUMENT_DEFINITION);
         string? selectedFile = PlatformServices.FileDialog.ShowSaveFileDialog(
             "Save Instrument Definition",
-            "Instrument Defintion|*.ins",
+            "Instrument Definition|*.ins",
             Path.GetFileName(fileName));
 
         if (selectedFile is null)

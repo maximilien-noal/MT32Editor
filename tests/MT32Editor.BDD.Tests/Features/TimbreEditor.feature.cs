@@ -486,7 +486,7 @@ namespace MT32Editor.BDD.Tests.Features
         [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
         [global::Xunit.TraitAttribute("Description", "Set pitch parameters")]
         [global::Xunit.InlineDataAttribute("0", "48", "9", new string[0])]
-        [global::Xunit.InlineDataAttribute("1", "75", "10", new string[0])]
+        [global::Xunit.InlineDataAttribute("1", "40", "10", new string[0])]
         [global::Xunit.InlineDataAttribute("2", "8", "11", new string[0])]
         public async global::System.Threading.Tasks.Task SetPitchParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
         {
@@ -707,7 +707,7 @@ namespace MT32Editor.BDD.Tests.Features
         [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
         [global::Xunit.TraitAttribute("Description", "Set pitch envelope parameters")]
         [global::Xunit.InlineDataAttribute("6", "80", "23", new string[0])]
-        [global::Xunit.InlineDataAttribute("7", "10", "24", new string[0])]
+        [global::Xunit.InlineDataAttribute("7", "5", "24", new string[0])]
         [global::Xunit.InlineDataAttribute("8", "5", "25", new string[0])]
         [global::Xunit.InlineDataAttribute("9", "70", "26", new string[0])]
         [global::Xunit.InlineDataAttribute("10", "3", "27", new string[0])]
@@ -751,11 +751,11 @@ namespace MT32Editor.BDD.Tests.Features
         [global::Xunit.InlineDataAttribute("12", "60", "29", new string[0])]
         [global::Xunit.InlineDataAttribute("13", "70", "30", new string[0])]
         [global::Xunit.InlineDataAttribute("14", "80", "31", new string[0])]
-        [global::Xunit.InlineDataAttribute("15", "90", "32", new string[0])]
-        [global::Xunit.InlineDataAttribute("16", "40", "33", new string[0])]
-        [global::Xunit.InlineDataAttribute("17", "30", "34", new string[0])]
-        [global::Xunit.InlineDataAttribute("18", "65", "35", new string[0])]
-        [global::Xunit.InlineDataAttribute("19", "55", "36", new string[0])]
+        [global::Xunit.InlineDataAttribute("15", "40", "32", new string[0])]
+        [global::Xunit.InlineDataAttribute("16", "30", "33", new string[0])]
+        [global::Xunit.InlineDataAttribute("17", "20", "34", new string[0])]
+        [global::Xunit.InlineDataAttribute("18", "45", "35", new string[0])]
+        [global::Xunit.InlineDataAttribute("19", "35", "36", new string[0])]
         public async global::System.Threading.Tasks.Task SetPitchEnvelopeTimeAndLevelParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
@@ -793,7 +793,7 @@ namespace MT32Editor.BDD.Tests.Features
         [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
         [global::Xunit.TraitAttribute("Description", "Set TVF bias and keyfollow parameters")]
         [global::Xunit.InlineDataAttribute("26", "64", "37", new string[0])]
-        [global::Xunit.InlineDataAttribute("27", "10", "38", new string[0])]
+        [global::Xunit.InlineDataAttribute("27", "5", "38", new string[0])]
         [global::Xunit.InlineDataAttribute("28", "75", "39", new string[0])]
         [global::Xunit.InlineDataAttribute("29", "50", "40", new string[0])]
         [global::Xunit.InlineDataAttribute("30", "3", "41", new string[0])]
@@ -879,9 +879,9 @@ namespace MT32Editor.BDD.Tests.Features
         [global::Xunit.SkippableTheoryAttribute(DisplayName="Set TVA bias and envelope parameters")]
         [global::Xunit.TraitAttribute("FeatureTitle", "Timbre Editor")]
         [global::Xunit.TraitAttribute("Description", "Set TVA bias and envelope parameters")]
-        [global::Xunit.InlineDataAttribute("44", "10", "52", new string[0])]
+        [global::Xunit.InlineDataAttribute("44", "-5", "52", new string[0])]
         [global::Xunit.InlineDataAttribute("45", "64", "53", new string[0])]
-        [global::Xunit.InlineDataAttribute("46", "8", "54", new string[0])]
+        [global::Xunit.InlineDataAttribute("46", "-4", "54", new string[0])]
         [global::Xunit.InlineDataAttribute("47", "3", "55", new string[0])]
         [global::Xunit.InlineDataAttribute("48", "2", "56", new string[0])]
         public async global::System.Threading.Tasks.Task SetTVABiasAndEnvelopeParameters(string paramNo, string value, string @__pickleIndex, string[] exampleTags)

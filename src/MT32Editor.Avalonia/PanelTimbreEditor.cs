@@ -164,6 +164,17 @@ public class PanelTimbreEditor : UserControl
         };
         topBar.Children.Add(buttonRefresh);
 
+        // Reset button - resets timbre to defaults (matching WinForms buttonReset)
+        var buttonReset = new Button { Content = "Reset" };
+        buttonReset.Click += (_, _) =>
+        {
+            if (PlatformServices.Notification.AskUserToConfirm("Reset all timbre parameters?", "MT-32 Editor"))
+            {
+                InitialiseTimbreParameters(editExisting: false);
+            }
+        };
+        topBar.Children.Add(buttonReset);
+
         checkBoxSustain = new CheckBox { Content = "Sustain" };
         checkBoxSustain.IsCheckedChanged += (_, _) =>
         {

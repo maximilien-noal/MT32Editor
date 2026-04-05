@@ -173,7 +173,7 @@ public class TimbreStructure
 
     public bool[] GetPartialMuteStatus()
     {
-        return partialMuteStatus;
+        return (bool[])partialMuteStatus.Clone();
     }
 
     public void SetPartialMuteStatus(int partialNo, bool newStatus, bool autoCorrect = false)
@@ -277,17 +277,18 @@ public class TimbreStructure
     {
         ValidatePartialNo(partialNo);
         ValidateParameterNo(parameterNo);
-        if (value + PartialConstants.offset[parameterNo] < 0)
+        int sysExValue = value + PartialConstants.offset[parameterNo];
+        if (sysExValue < 0)
         {
             partial[partialNo, parameterNo] = 0;
         }
-        else if (value > PartialConstants.maxValue[parameterNo] + PartialConstants.offset[parameterNo])
+        else if (sysExValue > PartialConstants.maxValue[parameterNo])
         {
             partial[partialNo, parameterNo] = PartialConstants.maxValue[parameterNo];
         }
         else
         {
-            partial[partialNo, parameterNo] = (byte)(value + PartialConstants.offset[parameterNo]);
+            partial[partialNo, parameterNo] = (byte)sysExValue;
         }
     }
 

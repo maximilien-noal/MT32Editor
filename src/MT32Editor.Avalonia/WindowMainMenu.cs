@@ -46,6 +46,8 @@ public partial class WindowMainMenu : Window
     private MenuItem? menuSaveWindowSize;
     private MenuItem? menuIgnoreSysConfigOnLoad;
     private MenuItem? menuExcludeSysConfigOnSave;
+    private MenuItem? menuVerboseConsole;
+    private MenuItem? menuPrioritiseTimbreEditor;
 
     public WindowMainMenu()
     {
@@ -251,6 +253,17 @@ public partial class WindowMainMenu : Window
             ConfigFile.Save();
         };
         optionsMenu.Items.Add(menuDarkMode);
+
+        optionsMenu.Items.Add(new Separator());
+
+        menuVerboseConsole = CreateToggleMenuItem("Verbose Console Messages", ConsoleMessage.Verbose());
+        menuVerboseConsole.Click += (_, _) =>
+        {
+            ConsoleMessage.SetVerbose(!ConsoleMessage.Verbose());
+            UpdateToggleMenuHeader(menuVerboseConsole, "Verbose Console Messages", ConsoleMessage.Verbose());
+            ConfigFile.Save();
+        };
+        optionsMenu.Items.Add(menuVerboseConsole);
         menuBar.Items.Add(optionsMenu);
 
         // --- View menu ---
@@ -264,6 +277,17 @@ public partial class WindowMainMenu : Window
             Height = APP_WINDOW_DEFAULT_HEIGHT;
         };
         viewMenu.Items.Add(restoreWindowSize);
+
+        viewMenu.Items.Add(new Separator());
+
+        menuPrioritiseTimbreEditor = CreateToggleMenuItem("Prioritise Timbre Editor", UISettings.PrioritiseTimbreEditor);
+        menuPrioritiseTimbreEditor.Click += (_, _) =>
+        {
+            UISettings.PrioritiseTimbreEditor = !UISettings.PrioritiseTimbreEditor;
+            UpdateToggleMenuHeader(menuPrioritiseTimbreEditor, "Prioritise Timbre Editor", UISettings.PrioritiseTimbreEditor);
+            ConfigFile.Save();
+        };
+        viewMenu.Items.Add(menuPrioritiseTimbreEditor);
         menuBar.Items.Add(viewMenu);
 
         // --- Help menu ---
@@ -394,6 +418,8 @@ public partial class WindowMainMenu : Window
         if (menuAllowReset is not null) UpdateToggleMenuHeader(menuAllowReset, "Allow MT-32 Reset", MT32SysEx.allowReset);
         if (menuCm32l is not null) UpdateToggleMenuHeader(menuCm32l, "CM-32L Mode (requires restart)", MT32SysEx.cm32LMode);
         if (menuDarkMode is not null) UpdateToggleMenuHeader(menuDarkMode, "Dark Mode", UISettings.DarkMode);
+        if (menuVerboseConsole is not null) UpdateToggleMenuHeader(menuVerboseConsole, "Verbose Console Messages", ConsoleMessage.Verbose());
+        if (menuPrioritiseTimbreEditor is not null) UpdateToggleMenuHeader(menuPrioritiseTimbreEditor, "Prioritise Timbre Editor", UISettings.PrioritiseTimbreEditor);
     }
 
     private void SetupMidiDevices(string[] savedDeviceNames)

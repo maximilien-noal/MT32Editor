@@ -36,7 +36,7 @@ internal static class ParseTools
 	/// <summary>
     /// Returns true if str is null or WhiteSpace- provided for compatibility with legacy .NET Framework versions
     /// </summary>
-    public static bool IsNullOrWhiteSpace(string str)
+    public static bool IsNullOrWhiteSpace(string? str)
     {
         if (str == null) return true;
         for (int i = 0; i < str.Length; i++)

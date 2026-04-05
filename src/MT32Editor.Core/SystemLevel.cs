@@ -150,6 +150,7 @@ public class SystemLevel
 
     public int GetUIMidiChannel(int partNo)
     {
+        partNo = LogicTools.ValidateRange("Part No.", partNo, minPermitted: 0, maxPermitted: 8, autoCorrect: true);
         if (midiChannel[partNo] == 16)
         {
             return 0; //off

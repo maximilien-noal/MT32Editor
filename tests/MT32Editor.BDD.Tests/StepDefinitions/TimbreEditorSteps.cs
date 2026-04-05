@@ -43,6 +43,7 @@ public class TimbreEditorSteps
     public void ThenTheTimbreShouldHavePartials(int count)
     {
         Assert.Equal(TimbreConstants.NO_OF_PARTIALS, count);
+        Assert.Equal(count, _timbre.GetPartialMuteStatus().Length);
     }
 
     [When("I set the timbre name to {string}")]

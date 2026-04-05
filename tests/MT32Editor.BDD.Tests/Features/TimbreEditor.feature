@@ -69,7 +69,7 @@ Feature: Timbre Editor
         Examples:
             | paramNo | value |
             | 0       | 48    |
-            | 1       | 75    |
+            | 1       | 40    |
             | 2       | 8     |
 
     Scenario Outline: Set LFO parameters
@@ -122,7 +122,7 @@ Feature: Timbre Editor
         Examples:
             | paramNo | value |
             | 6       | 80    |
-            | 7       | 10    |
+            | 7       | 5     |
             | 8       | 5     |
             | 9       | 70    |
             | 10      | 3     |
@@ -138,11 +138,11 @@ Feature: Timbre Editor
             | 12      | 60    |
             | 13      | 70    |
             | 14      | 80    |
-            | 15      | 90    |
-            | 16      | 40    |
-            | 17      | 30    |
-            | 18      | 65    |
-            | 19      | 55    |
+            | 15      | 40    |
+            | 16      | 30    |
+            | 17      | 20    |
+            | 18      | 45    |
+            | 19      | 35    |
 
     Scenario Outline: Set TVF bias and keyfollow parameters
         Given a new timbre editor is opened
@@ -152,7 +152,7 @@ Feature: Timbre Editor
         Examples:
             | paramNo | value |
             | 26      | 64    |
-            | 27      | 10    |
+            | 27      | 5     |
             | 28      | 75    |
             | 29      | 50    |
             | 30      | 3     |
@@ -182,9 +182,9 @@ Feature: Timbre Editor
 
         Examples:
             | paramNo | value |
-            | 44      | 10    |
+            | 44      | -5    |
             | 45      | 64    |
-            | 46      | 8     |
+            | 46      | -4    |
             | 47      | 3     |
             | 48      | 2     |
 
