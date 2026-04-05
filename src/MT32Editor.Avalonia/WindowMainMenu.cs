@@ -263,7 +263,7 @@ public partial class WindowMainMenu : Window
     {
         if (!MT32SysEx.cm32LMode)
         {
-            memoryState.SetDefaultRhythmBanks();
+            memoryState.SetDefaultMT32RhythmBanks();
         }
     }
 
@@ -336,13 +336,13 @@ public partial class WindowMainMenu : Window
     {
         titleBarFileName = fileName;
         string message = memoryState.GetSystem().GetMessage(0);
-        Title = UITools.TitleBarText(fileName, titleBarFileName, message, memoryState.changesMade);
+        Title = AvaloniaUITools.TitleBarText(fileName, titleBarFileName, message, memoryState.changesMade);
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
     {
         // Periodic UI refresh
-        Title = UITools.TitleBarText(titleBarFileName, titleBarFileName, memoryState.GetSystem().GetMessage(0), memoryState.changesMade);
+        Title = AvaloniaUITools.TitleBarText(titleBarFileName, titleBarFileName, memoryState.GetSystem().GetMessage(0), memoryState.changesMade);
     }
 
     private void TimerAutoSave_Tick(object? sender, EventArgs e)

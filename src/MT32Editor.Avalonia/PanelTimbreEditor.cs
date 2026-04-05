@@ -357,8 +357,8 @@ public class PanelTimbreEditor : UserControl
     private void PopulatePCMSamples()
     {
         comboBoxPCMSample.Items.Clear();
-        // Use preset timbre names as PCM sample list
-        string[] sampleNames = PresetTimbreNames.Get();
+        int bankNo = radioButtonPCMBankB.IsChecked == true ? 1 : 0;
+        string[] sampleNames = MT32Strings.GetAllSampleNames(bankNo);
         foreach (string name in sampleNames)
             comboBoxPCMSample.Items.Add(name);
         if (comboBoxPCMSample.Items.Count > 0)
