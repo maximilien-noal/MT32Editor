@@ -41,7 +41,7 @@ public class TimbreEditorSteps
     [Then("the timbre should have {int} partials")]
     public void ThenTheTimbreShouldHavePartials(int count)
     {
-        Assert.Equal(count, TimbreConstants.NO_OF_PARTIALS);
+        Assert.Equal(TimbreConstants.NO_OF_PARTIALS, count);
     }
 
     [When("I set the timbre name to {string}")]
@@ -182,5 +182,69 @@ public class TimbreEditorSteps
     public void ThenPartialShouldHaveTheSameParameterAsPartial(int target, int source)
     {
         Assert.Equal(_timbre.GetUIParameter(source, 0), _timbre.GetUIParameter(target, 0));
+    }
+
+    // Pitch Bend toggle
+    [When("I enable pitch bend on partial {int}")]
+    public void WhenIEnablePitchBendOnPartial(int partial)
+    {
+        _timbre.SetUIParameter(partial, 0x03, 1);
+    }
+
+    [When("I disable pitch bend on partial {int}")]
+    public void WhenIDisablePitchBendOnPartial(int partial)
+    {
+        _timbre.SetUIParameter(partial, 0x03, 0);
+    }
+
+    [Then("pitch bend on partial {int} should be enabled")]
+    public void ThenPitchBendOnPartialShouldBeEnabled(int partial)
+    {
+        Assert.Equal(1, _timbre.GetUIParameter(partial, 0x03));
+    }
+
+    [Then("pitch bend on partial {int} should be disabled")]
+    public void ThenPitchBendOnPartialShouldBeDisabled(int partial)
+    {
+        Assert.Equal(0, _timbre.GetUIParameter(partial, 0x03));
+    }
+
+    // Generic parameter set/get (for Pitch, LFO, TVF, TVA scenarios)
+    [When("I set parameter {int} on partial {int} to {int}")]
+    public void WhenISetParameterOnPartialTo(int paramNo, int partial, int value)
+    {
+        _timbre.SetUIParameter(partial, paramNo, value);
+    }
+
+    [Then("parameter {int} on partial {int} should be {int}")]
+    public void ThenParameterOnPartialShouldBe(int paramNo, int partial, int expected)
+    {
+        Assert.Equal(expected, _timbre.GetUIParameter(partial, paramNo));
+    }
+
+    // Waveform
+    [When("I set waveform on partial {int} to {int}")]
+    public void WhenISetWaveformOnPartialTo(int partial, int value)
+    {
+        _timbre.SetUIParameter(partial, 0x04, value);
+    }
+
+    [Then("waveform on partial {int} should be {int}")]
+    public void ThenWaveformOnPartialShouldBe(int partial, int expected)
+    {
+        Assert.Equal(expected, _timbre.GetUIParameter(partial, 0x04));
+    }
+
+    // All 58 parameters valid
+    [Then("all {int} parameters for partial {int} should have valid values")]
+    public void ThenAllParametersForPartialShouldHaveValidValues(int paramCount, int partial)
+    {
+        Assert.Equal(TimbreConstants.NO_OF_PARTIAL_PARAMETERS, paramCount);
+        for (int p = 0; p < paramCount; p++)
+        {
+            int value = _timbre.GetUIParameter(partial, p);
+            // Value should not throw and should be retrievable
+            Assert.True(value >= -128 && value <= 255, $"Parameter {p} has unexpected value {value}");
+        }
     }
 }

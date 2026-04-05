@@ -17,3 +17,17 @@ Feature: Memory Bank Editor
         Given a new MT-32 state is initialized
         When I select memory timbre 32
         Then the selected memory timbre should be 32
+
+    Scenario: Copy and paste timbre between memory slots
+        Given a new MT-32 state is initialized
+        When I create a custom timbre named "CopyMe"
+        And I store it in memory slot 5
+        And I copy memory timbre from slot 5 to slot 20
+        Then the timbre in slot 20 should be named "CopyMe"
+
+    Scenario: Clear a memory timbre slot
+        Given a new MT-32 state is initialized
+        When I create a custom timbre named "ToBeCleared"
+        And I store it in memory slot 3
+        And I clear memory slot 3
+        Then memory slot 3 should be empty

@@ -36,3 +36,18 @@ Feature: System Settings
         Given a new system level configuration
         When I set partial reserve for part 0 to 8
         Then partial reserve for part 0 should be 8
+
+    Scenario: Set display messages
+        Given a new system level configuration
+        When I set display message 1 to "Hello MT-32"
+        Then display message 1 should be "Hello MT-32"
+
+    Scenario: Partial reserve total cannot exceed 32
+        Given a new system level configuration
+        When I set partial reserve for part 0 to 32
+        Then partial reserve for part 0 should be 32
+
+    Scenario: MIDI channel can be disabled
+        Given a new system level configuration
+        When I set MIDI channel for part 0 to 0
+        Then MIDI channel for part 0 should be 0

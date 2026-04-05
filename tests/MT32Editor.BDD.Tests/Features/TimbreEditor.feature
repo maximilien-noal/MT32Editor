@@ -37,6 +37,13 @@ Feature: Timbre Editor
         When I disable sustain
         Then sustain should be disabled
 
+    Scenario: Toggle pitch bend
+        Given a new timbre editor is opened
+        When I enable pitch bend on partial 0
+        Then pitch bend on partial 0 should be enabled
+        When I disable pitch bend on partial 0
+        Then pitch bend on partial 0 should be disabled
+
     Scenario: Undo and redo timbre changes
         Given a new timbre editor is opened with history
         When I set the timbre name to "Changed"
@@ -53,3 +60,56 @@ Feature: Timbre Editor
         And I copy partial 0
         And I paste to partial 1
         Then partial 1 should have the same parameter as partial 0
+
+    Scenario Outline: Set pitch parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 0       | 48    |
+            | 1       | 75    |
+            | 2       | 8     |
+
+    Scenario Outline: Set LFO parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 20      | 50    |
+            | 21      | 75    |
+            | 22      | 30    |
+
+    Scenario Outline: Set TVF parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 23      | 80    |
+            | 24      | 15    |
+            | 25      | 10    |
+
+    Scenario Outline: Set TVA parameters
+        Given a new timbre editor is opened
+        When I set parameter <paramNo> on partial 0 to <value>
+        Then parameter <paramNo> on partial 0 should be <value>
+
+        Examples:
+            | paramNo | value |
+            | 41      | 85    |
+            | 42      | 60    |
+            | 43      | 64    |
+
+    Scenario: Set waveform type
+        Given a new timbre editor is opened
+        When I set waveform on partial 0 to 1
+        Then waveform on partial 0 should be 1
+
+    Scenario: All 58 partial parameters have valid defaults
+        Given a new timbre editor is opened
+        Then all 58 parameters for partial 0 should have valid values

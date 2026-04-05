@@ -66,4 +66,27 @@ public class MemoryBankEditorSteps
     {
         Assert.Equal(expected, _state.GetSelectedMemoryTimbre());
     }
+
+    [When("I copy memory timbre from slot {int} to slot {int}")]
+    public void WhenICopyMemoryTimbreFromSlotToSlot(int source, int dest)
+    {
+        var sourceTimbre = _state.GetMemoryTimbre(source);
+        _state.SetMemoryTimbre(sourceTimbre.Clone(), dest);
+    }
+
+    [When("I clear memory slot {int}")]
+    public void WhenIClearMemorySlot(int slot)
+    {
+        _state.SetMemoryTimbre(new TimbreStructure(createAudibleTimbre: false), slot);
+    }
+
+    [Then("memory slot {int} should be empty")]
+    public void ThenMemorySlotShouldBeEmpty(int slot)
+    {
+        // A cleared timbre has empty name; TimbreNames shows as "[empty]"
+        var timbre = _state.GetMemoryTimbre(slot);
+        string name = timbre.GetTimbreName().Trim();
+        Assert.True(name.Length == 0 || name == MT32Strings.EMPTY,
+            $"Expected empty timbre but got '{name}'");
+    }
 }

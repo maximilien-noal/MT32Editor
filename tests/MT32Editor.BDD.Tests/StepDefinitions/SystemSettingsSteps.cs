@@ -115,4 +115,29 @@ public class SystemSettingsSteps
     {
         Assert.Equal(expected, _system.GetPartialReserve(part));
     }
+
+    [When("I set display message {int} to {string}")]
+    public void WhenISetDisplayMessageTo(int messageNo, string text)
+    {
+        _system.SetMessage(messageNo - 1, text);
+    }
+
+    [Then("display message {int} should be {string}")]
+    public void ThenDisplayMessageShouldBe(int messageNo, string expected)
+    {
+        string actual = _system.GetMessage(messageNo - 1);
+        Assert.StartsWith(expected, actual);
+    }
+
+    [When("I set MIDI channel for part {int} to {int}")]
+    public void WhenISetMIDIChannelForPartTo(int part, int channel)
+    {
+        _system.SetUIMidiChannel(part, channel);
+    }
+
+    [Then("MIDI channel for part {int} should be {int}")]
+    public void ThenMIDIChannelForPartShouldBe(int part, int expected)
+    {
+        Assert.Equal(expected, _system.GetUIMidiChannel(part));
+    }
 }

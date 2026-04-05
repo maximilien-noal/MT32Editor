@@ -16,7 +16,6 @@ public class PanelTimbreEditor : UserControl
     private TimbreHistory timbreHistory;
     private int activePartial = 0;
     private bool blockParameterUpdates = false;
-    private bool initialised = false;
     private readonly DispatcherTimer timer;
 
     // Controls
@@ -24,6 +23,7 @@ public class PanelTimbreEditor : UserControl
     private readonly RadioButton[] radioPartial = new RadioButton[4];
     private readonly CheckBox[] checkBoxMute = new CheckBox[4];
     private readonly CheckBox checkBoxSustain;
+    private readonly CheckBox checkBoxPitchBend;
     private readonly CheckBox checkBoxShowLabels;
     private readonly CheckBox checkBoxShowAllPartials;
     private readonly ComboBox comboBoxPart12Structure;
@@ -165,6 +165,18 @@ public class PanelTimbreEditor : UserControl
         };
         topBar.Children.Add(checkBoxSustain);
 
+        checkBoxPitchBend = new CheckBox { Content = "Pitch Bend" };
+        checkBoxPitchBend.IsCheckedChanged += (_, _) =>
+        {
+            if (!blockParameterUpdates)
+            {
+                int pitchBendState = LogicTools.BoolToInt(checkBoxPitchBend.IsChecked == true);
+                timbre.SetUIParameter(activePartial, 0x03, pitchBendState);
+                MT32SysEx.SendPartialParameter(activePartial, 0x03, pitchBendState);
+            }
+        };
+        topBar.Children.Add(checkBoxPitchBend);
+
         checkBoxShowLabels = new CheckBox { Content = "Labels" };
         checkBoxShowLabels.IsCheckedChanged += (_, _) => UpdateAllGraphs();
         topBar.Children.Add(checkBoxShowLabels);
@@ -254,8 +266,8 @@ public class PanelTimbreEditor : UserControl
         {
             if (!blockParameterUpdates && comboBoxWaveform.SelectedIndex >= 0)
             {
-                timbre.SetUIParameter(activePartial, 0x00, comboBoxWaveform.SelectedIndex);
-                MT32SysEx.SendPartialParameter(activePartial, 0x00, timbre.GetUIParameter(activePartial, 0x00));
+                timbre.SetUIParameter(activePartial, 0x04, comboBoxWaveform.SelectedIndex);
+                MT32SysEx.SendPartialParameter(activePartial, 0x04, timbre.GetUIParameter(activePartial, 0x04));
             }
         };
         waveBar.Children.Add(comboBoxWaveform);
@@ -267,8 +279,8 @@ public class PanelTimbreEditor : UserControl
         {
             if (!blockParameterUpdates && comboBoxPCMSample.SelectedIndex >= 0)
             {
-                timbre.SetUIParameter(activePartial, 0x06, comboBoxPCMSample.SelectedIndex);
-                MT32SysEx.SendPartialParameter(activePartial, 0x06, timbre.GetUIParameter(activePartial, 0x06));
+                timbre.SetUIParameter(activePartial, 0x05, comboBoxPCMSample.SelectedIndex);
+                MT32SysEx.SendPartialParameter(activePartial, 0x05, timbre.GetUIParameter(activePartial, 0x05));
             }
         };
         waveBar.Children.Add(comboBoxPCMSample);
@@ -306,19 +318,26 @@ public class PanelTimbreEditor : UserControl
         paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
         paramGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
 
-        // Column 0: Pitch
+        // Column 0: Pitch + LFO (matching WinForms groupBoxPitch + groupBoxLFO)
+        // All 58 partial parameters mapped exactly as per WinForms FormTimbreEditor.cs
         var pitchCol = CreateSliderColumn("Pitch", new SolidColorBrush(Color.FromRgb(221, 160, 221)), new[] {
+            (0x00, "Coarse Pitch", 0, 96),
             (0x01, "Fine Pitch", 0, 100),
-            (0x02, "Key Follow", 0, 16),
-            (0x07, "Pitch Coarse", 0, 96),
-            (0x08, "Pitch Fine", 0, 100),
-            (0x09, "Pitch Bend", 0, 1),
+            (0x02, "Pitch Key Follow", 0, 16),
+            (0x06, "Pulse Width", 0, 100),
+            (0x07, "PW Velo Sens", 0, 14),
+            (0x08, "Pitch Env Depth", 0, 10),
+            (0x14, "LFO Rate", 0, 100),
+            (0x15, "LFO Depth", 0, 100),
+            (0x16, "LFO Mod Sens", 0, 100),
         });
         Grid.SetColumn(pitchCol, 0);
         paramGrid.Children.Add(pitchCol);
 
-        // Column 1: Pitch Envelope
+        // Column 1: Pitch Envelope (matching WinForms groupBoxPitchEnvelope)
         var pitchEnvCol = CreateSliderColumn("Pitch Envelope", new SolidColorBrush(Color.FromRgb(221, 160, 221)), new[] {
+            (0x09, "Velo Sensitivity", 0, 100),
+            (0x0A, "Time Key Follow", 0, 4),
             (0x0B, "T1", 0, 100), (0x0C, "T2", 0, 100), (0x0D, "T3", 0, 100), (0x0E, "T4", 0, 100),
             (0x0F, "L0", 0, 100), (0x10, "L1", 0, 100), (0x11, "L2", 0, 100),
             (0x12, "Sustain Level", 0, 100), (0x13, "Release Level", 0, 100),
@@ -326,25 +345,24 @@ public class PanelTimbreEditor : UserControl
         Grid.SetColumn(pitchEnvCol, 1);
         paramGrid.Children.Add(pitchEnvCol);
 
-        // Column 2: TVF (Filter)
+        // Column 2: TVF (Filter) (matching WinForms groupBoxTVF + TVF envelope)
         var tvfCol = CreateSliderColumn("TVF (Filter)", new SolidColorBrush(Color.FromRgb(240, 230, 140)), new[] {
-            (0x14, "Cutoff Freq", 0, 100), (0x15, "Resonance", 0, 30), (0x16, "Key Follow", 0, 14),
-            (0x17, "Bias Point", 0, 127), (0x18, "Bias Level", 0, 14),
-            (0x19, "Env Depth", 0, 100), (0x1A, "Env V-Sens", 0, 100),
-            (0x1B, "Dep. Key Fol", 0, 4), (0x1C, "Env T-Key Fol", 0, 4),
-            (0x1D, "Env V-Time", 0, 4),
+            (0x17, "Cutoff Freq", 0, 100), (0x18, "Resonance", 0, 30), (0x19, "Key Follow", 0, 16),
+            (0x1A, "Bias Point", 0, 127), (0x1B, "Bias Level", 0, 14),
+            (0x1C, "Env Depth", 0, 100), (0x1D, "Velo Sensitivity", 0, 100),
+            (0x1E, "Depth Key Follow", 0, 4), (0x1F, "Time Key Follow", 0, 4),
             (0x20, "T1", 0, 100), (0x21, "T2", 0, 100), (0x22, "T3", 0, 100), (0x23, "T4", 0, 100), (0x24, "T5", 0, 100),
             (0x25, "L1", 0, 100), (0x26, "L2", 0, 100), (0x27, "L3", 0, 100), (0x28, "Sustain", 0, 100),
         });
         Grid.SetColumn(tvfCol, 2);
         paramGrid.Children.Add(tvfCol);
 
-        // Column 3: TVA (Amplifier)
+        // Column 3: TVA (Amplifier) (matching WinForms groupBoxTVA + groupBoxTVABias + TVA envelope)
         var tvaCol = CreateSliderColumn("TVA (Amplifier)", new SolidColorBrush(Color.FromRgb(72, 209, 204)), new[] {
-            (0x29, "Level", 0, 100), (0x2A, "V-Sensitivity", 0, 100),
+            (0x29, "Level", 0, 100), (0x2A, "Velo Sensitivity", 0, 100),
             (0x2B, "Bias Point 1", 0, 127), (0x2C, "Bias Level 1", 0, 12),
             (0x2D, "Bias Point 2", 0, 127), (0x2E, "Bias Level 2", 0, 12),
-            (0x2F, "Env T-Key Fol", 0, 4), (0x30, "Env V-Time", 0, 4),
+            (0x2F, "Time Key Follow", 0, 4), (0x30, "Velo Key Follow", 0, 4),
             (0x31, "T1", 0, 100), (0x32, "T2", 0, 100), (0x33, "T3", 0, 100), (0x34, "T4", 0, 100), (0x35, "T5", 0, 100),
             (0x36, "L1", 0, 100), (0x37, "L2", 0, 100), (0x38, "L3", 0, 100), (0x39, "Sustain", 0, 100),
         });
@@ -361,8 +379,6 @@ public class PanelTimbreEditor : UserControl
         timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(UISettings.UI_REFRESH_INTERVAL) };
         timer.Tick += Timer_Tick;
         timer.Start();
-
-        initialised = true;
     }
 
     private StackPanel CreateSliderColumn(string groupName, IBrush headerBrush, (int paramNo, string name, int min, int max)[] parameters)
@@ -450,13 +466,18 @@ public class PanelTimbreEditor : UserControl
     {
         blockParameterUpdates = true;
 
-        int waveform = timbre.GetUIParameter(activePartial, 0x00);
+        // Waveform is parameter 0x04 (LA Synth/PCM), PCM sample is 0x05
+        int waveform = timbre.GetUIParameter(activePartial, 0x04);
         if (waveform >= 0 && waveform < comboBoxWaveform.Items.Count)
-            comboBoxWaveform.SelectedIndex = waveform;
+            comboBoxWaveform.SelectedIndex = Math.Clamp(waveform, 0, 1);
 
-        int pcmSample = timbre.GetUIParameter(activePartial, 0x06);
+        PopulatePCMSamples();
+        int pcmSample = timbre.GetUIParameter(activePartial, 0x05);
         if (pcmSample >= 0 && pcmSample < comboBoxPCMSample.Items.Count)
             comboBoxPCMSample.SelectedIndex = pcmSample;
+
+        // Pitch Bend is parameter 0x03 (checkbox)
+        checkBoxPitchBend.IsChecked = LogicTools.IntToBool(timbre.GetUIParameter(activePartial, 0x03));
 
         // Update all parameter sliders for the active partial
         for (int paramNo = 0; paramNo < sliders.Length; paramNo++)
