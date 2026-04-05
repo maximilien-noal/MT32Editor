@@ -34,6 +34,9 @@ public class PanelTimbreEditor : UserControl
     private readonly RadioButton radioButtonPCMBankB;
     private readonly Button buttonUndo;
     private readonly Button buttonRedo;
+    private readonly Button buttonCopyPartial;
+    private readonly Button buttonPastePartial;
+    private byte[]? partialClipboard;
 
     // Parameter sliders: indexed by parameter number (0x00-0x39)
     private readonly Slider?[] sliders = new Slider?[0x3A];
@@ -120,6 +123,40 @@ public class PanelTimbreEditor : UserControl
             if (timbreHistory.GetLatestActionNo() < timbreHistory.GetTopOfStack()) { timbre = timbreHistory.Redo(); SetAllControlValues(); }
         };
         topBar.Children.Add(buttonRedo);
+
+        // Copy/Paste partial buttons
+        buttonCopyPartial = new Button { Content = "Copy Partial" };
+        buttonCopyPartial.Click += (_, _) =>
+        {
+            partialClipboard = timbre.CopyPartial(activePartial);
+            if (buttonPastePartial is not null) buttonPastePartial.IsEnabled = true;
+        };
+        topBar.Children.Add(buttonCopyPartial);
+
+        buttonPastePartial = new Button { Content = "Paste Partial", IsEnabled = false };
+        buttonPastePartial.Click += (_, _) =>
+        {
+            if (partialClipboard is not null)
+            {
+                timbre.PastePartial(activePartial, partialClipboard);
+                MT32SysEx.ApplyPartialParameters(timbre, activePartial);
+                UpdatePartialControls();
+                UpdateAllGraphs();
+            }
+        };
+        topBar.Children.Add(buttonPastePartial);
+
+        // Refresh button - resends all parameters to MIDI device
+        var buttonRefresh = new Button { Content = "↻ Refresh" };
+        buttonRefresh.Click += (_, _) =>
+        {
+            for (int p = 0; p < TimbreConstants.NO_OF_PARTIALS; p++)
+            {
+                MT32SysEx.ApplyPartialParameters(timbre, p);
+            }
+            MT32SysEx.SendTimbreName(timbre.GetTimbreName());
+        };
+        topBar.Children.Add(buttonRefresh);
 
         checkBoxSustain = new CheckBox { Content = "Sustain" };
         checkBoxSustain.IsCheckedChanged += (_, _) =>

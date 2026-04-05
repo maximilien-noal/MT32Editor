@@ -168,7 +168,9 @@ public class PanelMemoryBankEditor : UserControl
             Background = AvaloniaUITools.GetListViewBackgroundBrush(),
             Foreground = AvaloniaUITools.GetForegroundBrush(),
             MinHeight = 28,
-            SelectionMode = SelectionMode.Single
+            SelectionMode = SelectionMode.Single,
+            FontFamily = new FontFamily("Consolas, Courier New, monospace"),
+            FontSize = 12
         };
         listBoxTimbres.SelectionChanged += ListBoxTimbres_SelectionChanged;
         mainPanel.Children.Add(listBoxTimbres);

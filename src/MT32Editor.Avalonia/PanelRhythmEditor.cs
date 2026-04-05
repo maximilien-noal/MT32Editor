@@ -178,7 +178,9 @@ public class PanelRhythmEditor : UserControl
         {
             Background = AvaloniaUITools.GetListViewBackgroundBrush(),
             Foreground = AvaloniaUITools.GetForegroundBrush(),
-            SelectionMode = SelectionMode.Single
+            SelectionMode = SelectionMode.Single,
+            FontFamily = new FontFamily("Consolas, Courier New, monospace"),
+            FontSize = 12
         };
         listBoxRhythmBank.SelectionChanged += ListBoxRhythmBank_SelectionChanged;
         mainPanel.Children.Add(listBoxRhythmBank);
@@ -610,6 +612,15 @@ public class PanelRhythmEditor : UserControl
         if (memoryState is null) return;
         memoryState.rhythmEditorActive = true;
         memoryState.patchEditorActive = false;
+    }
+
+    /// <summary>
+    /// Public method to refresh all rhythm display data (e.g. after SysEx load).
+    /// </summary>
+    public void RefreshDisplay()
+    {
+        if (memoryState is null) return;
+        DoFullRefresh();
     }
 
     /// <summary>

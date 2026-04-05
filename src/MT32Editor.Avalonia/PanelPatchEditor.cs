@@ -185,7 +185,9 @@ public class PanelPatchEditor : UserControl
         {
             Background = AvaloniaUITools.GetListViewBackgroundBrush(),
             Foreground = AvaloniaUITools.GetForegroundBrush(),
-            SelectionMode = SelectionMode.Single
+            SelectionMode = SelectionMode.Single,
+            FontFamily = new FontFamily("Consolas, Courier New, monospace"),
+            FontSize = 12
         };
         listBoxPatches.SelectionChanged += ListBoxPatches_SelectionChanged;
         mainPanel.Children.Add(listBoxPatches);
@@ -694,6 +696,16 @@ public class PanelPatchEditor : UserControl
         memoryState.rhythmEditorActive = false;
         int midiChannel = memoryState.GetSystem().GetSysExMidiChannel(0);
         Midi.SendProgramChange(memoryState.GetSelectedPatchNo(), midiChannel);
+    }
+
+    /// <summary>
+    /// Public method to refresh all patch display data (e.g. after SysEx load).
+    /// </summary>
+    public void RefreshDisplay()
+    {
+        if (memoryState is null) return;
+        int patchNo = (int)(numericUpDownPatchNo.Value ?? 1) - 1;
+        DoFullRefresh(patchNo);
     }
 
     /// <summary>
